@@ -18,7 +18,7 @@ class FiguresController < ApplicationController
 
   get '/figures/:id/edit' do
     @figure = Figure.find_by_id(params[:id])
-    erb :edit
+    erb :'figures/edit'
   end
 
   patch '/figures/:id' do
