@@ -1,9 +1,13 @@
 <h3>Show Figure</h3>
-<%=@figure.name%><br> 
+<%=@figure.name%><br>
 <!--%binding.pry%-->
 <h3>Show Figure Landmark Name</h3>
-<%=@figure.landmarks.name%><br> 
+<% @figure.landmarks.each do |landmark| %>
+  <%=landmark.name%>
+<% end %><br>
 <!--%binding.pry%-->
 <h3>Show Figure Landmark Title</h3>
-<%=@figure.titles.name%><br>
+<% @figure.titles.each do |title| %>
+  <%=title.name%>
+<% end %><br>
 <!--%binding.pry%-->
