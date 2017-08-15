@@ -12,8 +12,12 @@ class FiguresController < ApplicationController
 
   post '/figures' do
     #binding.pry
-    @figure = Figure.create(params["figure"])
-    redirect "figures/#{@figure.id}"
+    @figure = Figure.create(name: params["figure"]["name"])
+    @figure.update(landmark_ids: params["figure"]["landmark_ids"]) unless params["figure"]["landmark_ids"].empty?
+    @figure.landmarks.create(name: params["landmark"]["name"]) unless params["landmark"]["name"].empty?
+    @figure.update(title_ids: params["figure"]["title_ids"]) unless params["figure"]["title_ids"].empty?
+    @figure.titles.create(name: params["title"]["name"]) unless params["title"]["name"].empty?
+    @figure.save
   end
 
   get '/figures/:id/edit' do
