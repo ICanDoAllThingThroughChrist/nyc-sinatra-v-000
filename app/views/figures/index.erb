@@ -8,7 +8,9 @@
     <h2>Figures Index</h2>
     <ul>
       <%Figure.all.each do |figure|%>
-      <li><a href ="/figures/<%=figure.id%>"><%=figure.name%></a></li>
+      <li><a href ="/figures/<%=figure.id%>">
+      <%=figure.name%></a>
+      </li>
       <% end %>
     </ul>
   </body>
