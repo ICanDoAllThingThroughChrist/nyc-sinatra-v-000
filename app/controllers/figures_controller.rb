@@ -9,25 +9,35 @@ class FiguresController < ApplicationController
     @titles = Title.all
     erb :'figures/new'
   end
-  
+
    get '/figures/:id' do
     @figure = Figure.find_by_id(params[:id])
     erb :'figures/show'
   end
 
   post '/figures' do
-    #binding.pry
-    @figure = Figure.create(name: params["figure"]["name"])
-    @figure.update(landmark_ids: params["figure"]["landmark_ids"]) unless params["figure"]["landmark_ids"].empty?
-    @figure.landmarks.create(name: params["landmark"]["name"]) unless params["landmark"]["name"].empty?
-    @figure.update(title_ids: params["figure"]["title_ids"]) unless params["figure"]["title_ids"].empty?
-    @figure.titles.create(name: params["title"]["name"]) unless params["title"]["name"].empty?
-    @figure.save
+     @figure = Figure.create(name: params["figure"]["name"])
+     @figure.save
+     redirect to "/figures/#{@figure.id}"
   end
 
   get '/figures/:id/edit' do
     @figure = Figure.find_by_id(params[:id])
     erb :'figures/edit'
+  end
+
+  post '/figures/:id' do
+    @figure = Figure.find_by_id(params[:id])
+    if @figure.name != params["figure"]["name"]
+      @figure.name = params["figure"]["name"]
+    end
+    @figure.landmarks.clear
+    params["figure"]["landmark_ids"].each do |x| @figure.landmarks << Landmark.find_by_id(x) end
+    if !Landmark.find_by_name(params["landmak"]["name"])#duplication avoided
+      @figure.landmarks << Landmark.create(name: params["landmark"]["name"], year_completed: params["landmark"]["year_completed"])
+    end
+    @figure.save
+    redirect to "/figures/#{@figure.id}"
   end
 
   patch '/figures/:id' do
@@ -42,4 +52,5 @@ class FiguresController < ApplicationController
     @figure.delete
   redirect to '/figures'
 end
+
 end

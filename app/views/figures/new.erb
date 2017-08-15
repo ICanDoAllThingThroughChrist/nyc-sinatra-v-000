@@ -10,23 +10,23 @@
   <p>Your Figure: <input type="text" name="figure[name]", id="figure_name"></p>
  <p>Your Figure's Existing Landmark</p>
   <%@landmarks.each do |landmark|%>
-    <li><input type="checkbox" name="figure[landmark_ids][]" value="<%=landmark.id%>" id="<%=landmark.id%>">
+    <li><input type="checkbox" name="figure[landmark_ids][]" value="<%=landmark.id%>" id="landmark_<%=landmark.id%>">
     <%=landmark.name%></input></li>
   <%end%>
   <br></br>
   <label>Your Figure's New Landmark</label><br>
-  <input  type="text" name="landmark[name]"></input>
+  <input  type="text" name="landmark[name]" id="new_landmark"></input>
   <br></br>
   <p>Your Figure's Existing Title</p>
    <%@titles.each do |title|%>
-     <li><input type="checkbox" name="figure[title_ids][]" value="<%=title.id%>" id="<%=title.id%>">
+     <li><input type="checkbox" name="figure[title_ids][]" value="<%=title.id%>" id="title_<%=title.id%>">
      <%=title.name%></input></li>
    <%end%>
    <br></br>
    <label>Your New Figure's Title</label><br>
-   <input  type="text" name="title[name]"></input>
+   <input  type="text" name="title[name]" id="new_title"></input>
    <br></br>
-  <input type="submit">
+  <input type="submit" value="Create New Figure">
 </form>
   </body>
 </html>
