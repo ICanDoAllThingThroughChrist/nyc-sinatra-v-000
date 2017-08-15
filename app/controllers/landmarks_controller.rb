@@ -27,7 +27,6 @@ class LandmarksController < ApplicationController
   end
 
   patch '/landmarks/:id' do
-    @landmark = Landmark.find_by_id(params[:id])
-    
+    @landmark = Landmark.find_by_id(params[:id]) 
   end
 end
