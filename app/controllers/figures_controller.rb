@@ -18,13 +18,13 @@ class FiguresController < ApplicationController
 
   post '/figures' do
      @figure = Figure.create(name: params["figure"]["name"])
-     #binding.pry
-     # here we update the title_ids, if we created before this line, then the title we created will have it's title_id removed from the title_ids array
+     #to persist in existing title_ids, UNLESS title_ids.nil?
      @figure.update(title_ids: params["figure"]["title_ids"]) unless params["figure"]["title_ids"].nil?
-     #here we create a new title with #id 3
      @figure.titles.create(name: params["title"]["name"]) unless params["title"]["name"].empty?
+     #binding.pry
      @figure.update(landmark_ids: params["figure"]["landmark_ids"]) unless params["figure"]["landmark_ids"].nil?
      @figure.landmarks.create(name: params["landmark"]["name"]) unless params["landmark"]["name"].empty?
+     #binding.pry
      @figure.save
      redirect to "/figures/#{@figure.id}"
   end
